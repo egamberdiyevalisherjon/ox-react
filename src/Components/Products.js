@@ -16,7 +16,20 @@ const Products = () => {
     axios
       .get("/variations")
       .then((res) => {
-        setData(res.data.items);
+        setData(
+          res.data.items.sort((a, b) => {
+            const p1 = a.productName.toLowerCase();
+            const p2 = b.productName.toLowerCase();
+
+            if (p1 < p2) {
+              return -1;
+            }
+            if (p1 > p2) {
+              return 1;
+            }
+            return 0;
+          })
+        );
       })
       .catch(() => {
         newError("SomeThing went wrong, please retry again...");
@@ -132,8 +145,6 @@ const Products = () => {
       dataIndex: "productName",
       key: "productName",
       ...getColumnSearchProps("productName"),
-      sorter: (a, b) => a.productName.toLowerCase() < b.productName.toLowerCase(),
-      sortDirections: ["descend",],
     },
     {
       title: "Barcode",
