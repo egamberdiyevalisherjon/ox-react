@@ -132,16 +132,14 @@ const Products = () => {
       dataIndex: "productName",
       key: "productName",
       ...getColumnSearchProps("productName"),
-      sorter: (a, b) => a.productName.length - b.productName.length,
-      sortDirections: ["descend", "ascend"],
+      sorter: (a, b) => a.productName.toLowerCase() < b.productName.toLowerCase(),
+      sortDirections: ["descend",],
     },
     {
       title: "Barcode",
       dataIndex: "barcode",
       key: "barcode",
       ...getColumnSearchProps("barcode"),
-      sorter: (a, b) => a.barcode - b.barcode,
-      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Description",
@@ -153,8 +151,6 @@ const Products = () => {
       title: "Supplier",
       dataIndex: "supplier",
       key: "supplier",
-      sorter: (a, b) => a.supplier.length - b.supplier.length,
-      sortDirections: ["descend", "ascend"],
       ...getColumnSearchProps("supplier"),
     },
     {
